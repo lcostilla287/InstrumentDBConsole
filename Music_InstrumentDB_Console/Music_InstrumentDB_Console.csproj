@@ -50,11 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication.cs" />
-
+    <Compile Include="POCO\Instrument.cs" />
     <Compile Include="POCO\Musician.cs" />
-
     <Compile Include="POCO\InstrumentFamily.cs" />
-
     <Compile Include="POCO\Token.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramUI.cs" />
