@@ -102,5 +102,7 @@ namespace Music_InstrumentDB_Console
             Console.WriteLine("Insert menu here");
             Console.ReadKey();
         }
+
+        InstrumentFamily instrumentFamily = new InstrumentFamily();
     }
 }
