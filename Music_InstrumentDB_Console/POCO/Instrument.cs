@@ -22,7 +22,7 @@ namespace Music_InstrumentDB_Console.POCO
         public string Transposition { get; set; }
 
         [JsonProperty("FamilyId")]
-        public object FamilyId { get; set; }
+        public int? FamilyId { get; set; }
 
         [JsonProperty("InstrumentFamilyName")]
         public string InstrumentFamilyName { get; set; }
