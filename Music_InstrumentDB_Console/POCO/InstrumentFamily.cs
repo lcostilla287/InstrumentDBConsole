@@ -27,7 +27,7 @@ namespace Music_InstrumentDB_Console.POCO
         [JsonProperty("tuning")]
         public string Tuning { get; set; }
 
-        //[JsonProperty("instruments")]
-        //public virtual List<Instrument> Instruments { get; set; } = new List<Instrument>();
+        [JsonProperty("instruments")]
+        public virtual List<Instrument> Instruments { get; set; } = new List<Instrument>();
     }
 }
