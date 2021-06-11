@@ -59,20 +59,7 @@ namespace Music_InstrumentDB_Console
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
                 Console.ReadKey();
 
-
                 Menu();
-                //HttpResponseMessage response = httpClient.GetAsync("https://localhost:44363/api/Instrument/2").Result;
-                //if (response.IsSuccessStatusCode)
-                //{
-                    //Console.WriteLine(response.Content.ReadAsStringAsync().Result);
-                //}
-                //else
-                //{
-                    //Console.WriteLine(response.StatusCode);
-                //}
-                //Console.ReadKey();
-                //Console.ReadKey();
-                //Info();
             }
             else
             {
@@ -81,25 +68,56 @@ namespace Music_InstrumentDB_Console
                 EnterLogin();
             }
         }
-        //private void Info()
-        //{
-
-            //HttpResponseMessage response = httpClient.GetAsync("https://localhost:44363/api/Instrument/2").Result;
-
-            //if (response.IsSuccessStatusCode)
-            //{
-                //Console.WriteLine(response.Content.ReadAsStringAsync().Result);
-            //}
-            //else
-            //{
-                //Console.WriteLine(response.StatusCode);
-            //}
-            //Console.ReadKey();
-        //}
+        
         private void Menu()
         {
+            Console.Clear();
             Console.WriteLine("What would you like to do?");
-            Console.WriteLine("Insert menu here");
+            Console.WriteLine("1. Access Instrument Families\n" +
+                "2. Access Instruments\n" +
+                "3. Access Musicians\n" +
+                "4. Log Out");
+            
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    InstrumentFamilyAccess();
+                    break;
+                case "2":
+                    InstrumentAccess();
+                    break;
+                case "3":
+                    MusicianAccess();
+                    break;
+                case "4":
+                    EnterLogin();
+                    break;
+                default:
+                    Console.WriteLine("Please select a valid option");
+                    Console.ReadKey();
+                    Menu();
+                    break;
+            }
+        }
+
+        private void InstrumentFamilyAccess()
+        {
+            Console.Clear();
+            Console.WriteLine("You are now accessing instrument families");
+            Console.ReadKey();
+        }
+
+        private void InstrumentAccess()
+        {
+            Console.Clear();
+            Console.WriteLine("You are now accessing instruments");
+            Console.ReadKey();
+        }
+
+        private void MusicianAccess()
+        {
+            Console.Clear();
+            Console.WriteLine("You are now accessing musicians");
             Console.ReadKey();
         }
 
