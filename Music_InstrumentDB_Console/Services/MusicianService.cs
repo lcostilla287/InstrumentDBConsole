@@ -14,7 +14,7 @@ namespace Music_InstrumentDB_Console.Services
 
         public async Task<Musician> GetMusicianAsync(int id)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync("$https://localhost:44363/api/Musician/{id}");
+            HttpResponseMessage response = await _httpClient.GetAsync($"https://localhost:44363/api/Musician/{id}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -26,7 +26,7 @@ namespace Music_InstrumentDB_Console.Services
 
         public async Task<Musician> GetAllMusicianAsnc()
         {
-            HttpResponseMessage response = await _httpClient.GetAsync("$https://localhost:44363/api/Musician");
+            HttpResponseMessage response = await _httpClient.GetAsync($"https://localhost:44363/api/Musician");
 
             if (response.IsSuccessStatusCode)
             {
@@ -38,7 +38,7 @@ namespace Music_InstrumentDB_Console.Services
 
         public async Task<bool> PostMusicianAsync (Musician newMusician)
         {
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync("$https://localhost:44363/api/Musician", newMusician);
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"https://localhost:44363/api/Musician", newMusician);
 
             if (response.IsSuccessStatusCode)
             {
@@ -49,7 +49,7 @@ namespace Music_InstrumentDB_Console.Services
 
         public async Task<bool> PutMusicianAsync(int id, Musician updatedMusician)
         {
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync("$https://localhost:44363/api/Musician", updatedMusician);
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"https://localhost:44363/api/Musician", updatedMusician);
 
             if (response.IsSuccessStatusCode)
             {
