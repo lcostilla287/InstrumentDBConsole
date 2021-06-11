@@ -116,9 +116,35 @@ namespace Music_InstrumentDB_Console
 
         private void MusicianAccess()
         {
-            Console.Clear();
-            Console.WriteLine("You are now accessing musicians");
-            Console.ReadKey();
+            bool isRunning = true;
+            while (isRunning)
+            {
+                Console.Clear();
+                Console.WriteLine("You are now accessing musicians. What would you like to do?");
+                Console.WriteLine("1. Create a musician\n" +
+                    "2. View a musician by id\n" +
+                    "3. View all musicians\n" +
+                    "4. Edit a musician\n" +
+                    "5. Delete a musician");
+
+                switch (Console.ReadLine())
+                {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "4":
+                        break;
+                    default:
+                        Console.WriteLine("Please select a valid option");
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                }
+                Console.ReadKey();
+            }
         }
     }
 }
