@@ -1,4 +1,5 @@
 ﻿using Music_InstrumentDB_Console.POCO;
+using Music_InstrumentDB_Console.ProgramUIMethods;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -116,6 +117,7 @@ namespace Music_InstrumentDB_Console
 
         private void MusicianAccess()
         {
+            MusicianMethod mm = new MusicianMethod();
             bool isRunning = true;
             while (isRunning)
             {
@@ -132,6 +134,7 @@ namespace Music_InstrumentDB_Console
                     case "1":
                         break;
                     case "2":
+                        mm.DisplayMusicianById();
                         break;
                     case "3":
                         break;
