@@ -50,9 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication.cs" />
-    <Compile Include="POCO\Musician.cs" />
-    <Compile Include="POCO\InstrumentFamily.cs" />
-    <Compile Include="POCO\SearchResult.cs" />
     <Compile Include="POCO\Instrument.cs" />
     <Compile Include="POCO\Musician.cs" />
     <Compile Include="POCO\InstrumentFamily.cs" />
@@ -60,7 +57,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="ProgramUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\FamilyService.cs" />
     <Compile Include="Services\InstrumentService.cs" />
     <Compile Include="Services\MusicianService.cs" />
   </ItemGroup>

@@ -120,9 +120,5 @@ namespace Music_InstrumentDB_Console
             Console.WriteLine("You are now accessing musicians");
             Console.ReadKey();
         }
-
-        InstrumentFamily instrumentFamily = new InstrumentFamily();
-
-        
     }
 }
