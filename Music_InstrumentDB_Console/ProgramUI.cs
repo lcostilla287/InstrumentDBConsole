@@ -134,7 +134,7 @@ namespace Music_InstrumentDB_Console
                     case "1":
                         break;
                     case "2":
-                        mm.DisplayMusicianById();
+                        mm.DisplayMusicianById(httpClient);
                         break;
                     case "3":
                         break;

@@ -11,21 +11,24 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
 {
     public class MusicianMethod
     {
-        MusicianService musicianService = new MusicianService();
+        MusicianService _musicianService = new MusicianService();
 
-        public void DisplayMusicianById()
+        public void DisplayMusicianById(HttpClient client)
         {
             Console.Clear();
             Console.WriteLine("What is the id of the musician you would like to search for?");
             int userInput = Convert.ToInt32(Console.ReadLine());
 
-            Musician musician = musicianService.GetMusicianAsync(userInput).Result;
+            Musician musician = _musicianService.GetMusicianAsync(client, userInput).Result;
 
             if(musician != null)
             {
                 Console.WriteLine(musician.FullName);
             }
+            else
+            {
             Console.WriteLine("We could not find a musician with this id");
+            }
         }
     }
 }
