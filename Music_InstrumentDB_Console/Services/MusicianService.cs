@@ -30,18 +30,18 @@ namespace Music_InstrumentDB_Console.Services
             return null;
         }
 
-        //public async Task<List<Musician>> GetAllMusicianAsnc()
-        //{
-        //    HttpResponseMessage response = await _httpClient.GetAsync($"https://localhost:44363/api/Musician");
+        public async Task<List<Musician>> GetAllMusicianAsnc()
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync($"https://localhost:44363/api/Musician");
 
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        Musician musician = await response.Content.ReadAsAsync<Musician>();
-        //        var list = JsonConvert.DeserializeObject<List<Musician>>(musician);
-        //        return list;
-        //    }
-        //    return null;
-        //}
+            if (response.IsSuccessStatusCode)
+            {
+                List<Musician> musicians = response.Content.ReadAsAsync<List<Musician>>().Result;
+                //var item = JsonConvert.DeserializeObject<T>(jsonData);
+                return musicians;
+            }
+            return null;
+        }
 
         public async Task<bool> PostMusicianAsync (Musician newMusician)
         {

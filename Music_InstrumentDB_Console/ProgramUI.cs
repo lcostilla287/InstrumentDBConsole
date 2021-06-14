@@ -137,6 +137,7 @@ namespace Music_InstrumentDB_Console
                         _musicianMethod.DisplayMusicianById();
                         break;
                     case "3":
+                        _musicianMethod.DisplayAllMusicians();
                         break;
                     case "4":
                         break;

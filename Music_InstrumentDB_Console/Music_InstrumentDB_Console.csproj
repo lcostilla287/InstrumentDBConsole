@@ -55,6 +55,7 @@
     <Compile Include="POCO\InstrumentFamily.cs" />
     <Compile Include="POCO\SearchResult.cs" />
     <Compile Include="POCO\Token.cs" />
+    <Compile Include="POCO\Wrapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramUI.cs" />
     <Compile Include="ProgramUIMethods\MusicianMethod.cs" />

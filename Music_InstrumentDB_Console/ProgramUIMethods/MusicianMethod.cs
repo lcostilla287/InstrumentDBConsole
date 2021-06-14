@@ -26,7 +26,7 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
 
             Musician musician = _musicianService.GetMusicianAsync(userInput).Result;
 
-            if(musician != null)
+            if (musician != null)
             {
                 Console.WriteLine($"Musician ID:  {musician.FamousMusicianId} \n" +
                     $"Full Name: {musician.FullName} \n" +
@@ -37,25 +37,30 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             }
             else
             {
-            Console.WriteLine("We could not find a musician with this id");
+                Console.WriteLine("We could not find a musician with this id");
             }
         }
 
-        //public void DisplayAllMusicians()
-        //{
-        //    Console.Clear();
-        //    List<Musician> allMusicians = _musicianService.GetAllMusicianAsnc();
+        public void DisplayAllMusicians()
+        {
+            Console.Clear();
+            List<Musician> musicians = _musicianService.GetAllMusicianAsnc().Result;
 
-        //    foreach (Musician musician in allMusicians)
-        //    {
-        //        Console.ForegroundColor = (ConsoleColor.Green);
-        //        Console.WriteLine($"Musician ID:  {musician.FamousMusicianId} \n" +
-        //            $"Full Name: {musician.FullName} \n" +
-        //            $"Instrument they play:  {musician.InstrumentName} \n" +
-        //            $"Instrument ID:  {musician.InstrumentId} \n" +
-        //            $"Genre:  {musician.MusicGenre} \n");
-        //        Console.ResetColor();
-        //    }
-        //}
+            if (musicians.Count > 0)
+            {
+                foreach (Musician musician in musicians)
+                {
+                    Console.WriteLine($"Musician ID:  {musician.FamousMusicianId} \n" +
+                    $"Full Name: {musician.FullName} \n" +
+                    $"Instrument they play:  {musician.InstrumentName} \n" +
+                    $"Instrument ID:  {musician.InstrumentId} \n" +
+                    $"Genre:  {musician.MusicGenre} \n");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Could not find any musicians");
+            }
+        }
     }
 }
