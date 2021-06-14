@@ -65,6 +65,8 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
 
         public void CreateMusician()
         {
+            Console.Clear();
+
             Musician musician = new Musician();
 
             Console.Write("Please enter the full name of the musician: ");
@@ -91,9 +93,15 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             }
         }
 
-        public void EditMusician(int musicianId)
+        public void EditMusician()
         {
+            Console.Clear();
+
+            Console.WriteLine("What is the id for the musician you would like to edit?");
+            int musicianId = Convert.ToInt32(Console.ReadLine());
+
             Musician musician = _musicianService.GetMusicianAsync(musicianId).Result;
+
 
             Console.Write("Please enter the full name of the musician: ");
             musician.FullName = Console.ReadLine();
@@ -116,6 +124,23 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             else
             {
                 Console.WriteLine("The musician could not be added");
+            }
+        }
+
+        public void DeleteMusician()
+        {
+            Console.Clear();
+            Console.WriteLine("Please enter the id of the musician you would like to delete");
+
+            bool wasDeleted = _musicianService.DeleteMusicianAsync(Convert.ToInt32(Console.ReadLine())).Result;
+
+            if(wasDeleted)
+            {
+                Console.WriteLine("The musician was successfully deleted");
+            }
+            else
+            {
+                Console.WriteLine("The musician could not be deleted");
             }
         }
     }

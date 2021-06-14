@@ -56,7 +56,7 @@ namespace Music_InstrumentDB_Console.Services
 
         public async Task<bool> PutMusicianAsync(int id, Musician updatedMusician)
         {
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"https://localhost:44363/api/Musician", updatedMusician);
+            HttpResponseMessage response = await _httpClient.PutAsJsonAsync($"https://localhost:44363/api/Musician", updatedMusician);
 
             if (response.IsSuccessStatusCode)
             {

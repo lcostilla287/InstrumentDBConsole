@@ -141,6 +141,10 @@ namespace Music_InstrumentDB_Console
                         _musicianMethod.DisplayAllMusicians();
                         break;
                     case "4":
+                        _musicianMethod.EditMusician();
+                        break;
+                    case "5":
+                        _musicianMethod.DeleteMusician();
                         break;
                     default:
                         Console.WriteLine("Please select a valid option");
