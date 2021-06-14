@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,12 @@ namespace Music_InstrumentDB_Console.Services
 {
     public class FamilyService
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        private HttpClient _httpClient = new HttpClient();
+
+        public void Authorization(string accesstoken)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accesstoken);
+        }
 
         public async Task<bool> PostFamilyAsync(int id, InstrumentFamily newFamily)
         {
@@ -37,13 +43,13 @@ namespace Music_InstrumentDB_Console.Services
             return null;
         }
 
-        public async Task<InstrumentFamily> GetAllFamiliesAsync()
+        public async Task<List<InstrumentFamily>> GetAllFamiliesAsync()
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"https://localhost:44363/api/InstrumentFamily");
 
             if (response.IsSuccessStatusCode)
             {
-                InstrumentFamily family = await response.Content.ReadAsAsync<InstrumentFamily>();
+                List<InstrumentFamily> family = await response.Content.ReadAsAsync<List<InstrumentFamily>>();
                 return family;
             }
 

@@ -14,7 +14,8 @@ namespace Music_InstrumentDB_Console
     public class ProgramUI
     {
         private Authentication authentication = new Authentication();
-        private HttpClient httpClient = new HttpClient();
+        FamilyMethod _familyMethod = new FamilyMethod();
+
         public void Run()
         {
             Login();
@@ -58,7 +59,8 @@ namespace Music_InstrumentDB_Console
             if (token.AccessToken != null)
             {
                 Console.WriteLine("Welcome");
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+                _familyMethod.ImplementBearerToken(token.AccessToken);
+                Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
 
                 Menu();
@@ -106,7 +108,6 @@ namespace Music_InstrumentDB_Console
                 }
             }
         }
-        FamilyMethod _familyMethod = new FamilyMethod();
         private void InstrumentFamilyAccess()
         {
             bool keepRunning = true;
@@ -148,6 +149,7 @@ namespace Music_InstrumentDB_Console
                         Console.WriteLine("Please enter a valid number");
                         break;
                 }
+                Console.ReadKey();
             }
         }
 
