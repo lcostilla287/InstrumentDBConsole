@@ -63,7 +63,7 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             Console.ReadKey();
         }
 
-        //Work on this
+        //Works
         public void GetAllInstruments()
         {
             Console.WriteLine("We are getting all instruments");
@@ -99,6 +99,24 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
                 Console.WriteLine("There is no instrument by that id");
             }
             Console.ReadKey();
+        }
+
+        public void SearchInstrumentByName()
+        {
+            Console.Write("What is the name of the instrument that you would like to search for?");
+            SearchResult<Instrument> instruments = _instrumentService.GetSearchAsync(Console.ReadLine()).Result;
+            if (instruments.Count > 0)
+            {
+                    Console.WriteLine("Here are the instruments by that name");
+                foreach(Instrument instrumentResult in instruments.Results)
+                {
+                    Console.WriteLine(instrumentResult.InstrumentName);
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no instruments by that name");
+            }
         }
 
         public void EditAnInstrument()
