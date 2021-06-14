@@ -13,7 +13,8 @@ namespace Music_InstrumentDB_Console
     public class ProgramUI
     {
         private Authentication authentication = new Authentication();
-        private HttpClient httpClient = new HttpClient();
+        private MusicianMethod _musicianMethod = new MusicianMethod();
+
         public void Run()
         {
             Login();
@@ -57,7 +58,7 @@ namespace Music_InstrumentDB_Console
             if (token != null)
             {
                 Console.WriteLine("Welcome");
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+                _musicianMethod.ImplementBearerToken(token.AccessToken);
                 Console.ReadKey();
 
                 Menu();
@@ -117,7 +118,6 @@ namespace Music_InstrumentDB_Console
 
         private void MusicianAccess()
         {
-            MusicianMethod mm = new MusicianMethod();
             bool isRunning = true;
             while (isRunning)
             {
@@ -134,7 +134,7 @@ namespace Music_InstrumentDB_Console
                     case "1":
                         break;
                     case "2":
-                        mm.DisplayMusicianById(httpClient);
+                        _musicianMethod.DisplayMusicianById();
                         break;
                     case "3":
                         break;
