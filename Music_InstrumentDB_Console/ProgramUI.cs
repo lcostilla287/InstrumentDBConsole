@@ -132,6 +132,7 @@ namespace Music_InstrumentDB_Console
                 switch (Console.ReadLine())
                 {
                     case "1":
+                        _musicianMethod.CreateMusician();
                         break;
                     case "2":
                         _musicianMethod.DisplayMusicianById();

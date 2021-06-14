@@ -62,5 +62,61 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
                 Console.WriteLine("Could not find any musicians");
             }
         }
+
+        public void CreateMusician()
+        {
+            Musician musician = new Musician();
+
+            Console.Write("Please enter the full name of the musician: ");
+            musician.FullName = Console.ReadLine();
+
+            Console.Write("Enter the ID of the instrument this musician plays: ");
+            musician.InstrumentId = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Enter a description for this Musician: ");
+            musician.Description = Console.ReadLine();
+
+            Console.Write("Enter a genre for this Musician: ");
+            musician.MusicGenre = Console.ReadLine();
+
+
+            bool addedSuccessfully = _musicianService.PostMusicianAsync(musician).Result;
+            if (addedSuccessfully)
+            {
+                Console.WriteLine("The musician was successfully added");
+            }
+            else
+            {
+                Console.WriteLine("The musician could not be added");
+            }
+        }
+
+        public void EditMusician(int musicianId)
+        {
+            Musician musician = _musicianService.GetMusicianAsync(musicianId).Result;
+
+            Console.Write("Please enter the full name of the musician: ");
+            musician.FullName = Console.ReadLine();
+
+            Console.Write("Enter the ID of the instrument this musician plays: ");
+            musician.InstrumentId = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Enter a description for this Musician: ");
+            musician.Description = Console.ReadLine();
+
+            Console.Write("Enter a genre for this Musician: ");
+            musician.MusicGenre = Console.ReadLine();
+
+
+            bool addedSuccessfully = _musicianService.PutMusicianAsync(musicianId, musician).Result;
+            if (addedSuccessfully)
+            {
+                Console.WriteLine("The musician was successfully added");
+            }
+            else
+            {
+                Console.WriteLine("The musician could not be added");
+            }
+        }
     }
 }
