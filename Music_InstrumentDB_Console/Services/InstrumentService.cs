@@ -46,15 +46,16 @@ namespace Music_InstrumentDB_Console.Services
             return null;
         }
         //Get All
-        public async Task<Instrument> GetAllInstrumentsAsync()
+        public async Task<List<Instrument>> GetAllInstrumentsAsync()
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"https://localhost:44363/api/Instrument");
 
             if (response.IsSuccessStatusCode)
             {
 
-                Instrument instrument = response.Content.ReadAsAsync<Instrument>().Result;
-                return instrument;
+                List<Instrument> instruments = response.Content.ReadAsAsync<List<Instrument>>().Result;
+                //List<Instrument> instruments = 
+                return instruments;
             }
             return null;
         }

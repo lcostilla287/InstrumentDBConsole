@@ -67,10 +67,14 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
         public void GetAllInstruments()
         {
             Console.WriteLine("We are getting all instruments");
-            Instrument instruments = _instrumentService.GetAllInstrumentsAsync().Result;
-            if (instruments != null)
+            List<Instrument> instruments = _instrumentService.GetAllInstrumentsAsync().Result;
+            if (instruments.Count > 0)
             {
-                Console.WriteLine(instruments.InstrumentName);
+                foreach (Instrument i in instruments)
+                {
+                Console.WriteLine(i.InstrumentId);
+                Console.WriteLine(i.InstrumentName);
+                }
             }
             else
             {
@@ -137,7 +141,7 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             }
             Console.ReadKey();
         }
-
+        //works
         public void HelpEditInstrument(int instrumentId)
         {
             Instrument instrument = _instrumentService.GetInstrumentAsync(instrumentId).Result;
