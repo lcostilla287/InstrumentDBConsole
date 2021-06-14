@@ -11,7 +11,7 @@ namespace Music_InstrumentDB_Console.Services
 {
     public class InstrumentService
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        private HttpClient _httpClient = new HttpClient();
 
         public void Authorization(string accesstoken)
         {

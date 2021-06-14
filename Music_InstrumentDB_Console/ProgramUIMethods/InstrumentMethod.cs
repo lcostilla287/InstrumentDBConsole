@@ -10,47 +10,21 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
 {
     public class InstrumentMethod
     {
-        public void InstrumentAccess()
+        InstrumentService _instrumentService = new InstrumentService();
+
+        public void ImplementBearerToken(string bearerToken) 
         {
-            InstrumentMenu();
+            _instrumentService.Authorization(bearerToken);
         }
 
-        public void InstrumentMenu()
+        public void CreateAnInstrument()
         {
-            bool isRunning = true;
 
-            while (isRunning)
-            {
-                Console.Clear();
-                Console.WriteLine("What would you like to do?\n" +
-                    "1. Get all instruments\n" +
-                    "2. Get instrument by ID\n" +
-                    "3. Go Back");
-
-                switch (Console.ReadLine())
-                {
-                    case "1":
-                        GetAllInstruments();
-                        break;
-                    case "2":
-                        GetInstrumentById();
-                        break;
-                    case "3":
-                        isRunning = false;
-                        break;
-                    default:
-                        Console.WriteLine("Please select a valid option");
-                        Console.ReadKey();
-                        break;
-                }
-            }
         }
-            InstrumentService instrumentService = new InstrumentService();
-
-        private void GetAllInstruments()
+        public void GetAllInstruments()
         {
             Console.WriteLine("We are getting all instruments");
-            Instrument instruments = instrumentService.GetAllInstrumentsAsync().Result;
+            Instrument instruments = _instrumentService.GetAllInstrumentsAsync().Result;
             if (instruments != null)
             {
                 Console.WriteLine(instruments.InstrumentName);
@@ -62,10 +36,20 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             Console.ReadKey();
         }
 
-        private void GetInstrumentById()
+        public void GetInstrumentById()
         {
             Console.WriteLine("We are getting an instrument by Id");
             Console.ReadKey();
+        }
+
+        public void EditAnInstrument()
+        {
+
+        }
+
+        public void DeleteAnInstrument()
+        {
+
         }
     }
 }
