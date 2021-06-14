@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Music_InstrumentDB_Console.POCO;
+using Music_InstrumentDB_Console.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,12 +45,21 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
                 }
             }
         }
+            InstrumentService instrumentService = new InstrumentService();
 
         private void GetAllInstruments()
         {
             Console.WriteLine("We are getting all instruments");
+            Instrument instruments = instrumentService.GetAllInstrumentsAsync().Result;
+            if (instruments != null)
+            {
+                Console.WriteLine(instruments.InstrumentName);
+            }
+            else
+            {
+                Console.WriteLine("Could not locate instruments");
+            }
             Console.ReadKey();
-            InstrumentMenu();
         }
 
         private void GetInstrumentById()

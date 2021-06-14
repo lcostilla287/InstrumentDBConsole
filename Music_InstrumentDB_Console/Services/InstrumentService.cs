@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,8 +13,11 @@ namespace Music_InstrumentDB_Console.Services
     {
         private readonly HttpClient _httpClient = new HttpClient();
 
+        public void Authorization(string accesstoken)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accesstoken);
+        }
         //Post
-
         public async Task<bool> PostInstrumentAsync(Instrument newInstrument)
         {
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync("https://localhost:44363/api/Instrument/", newInstrument);
