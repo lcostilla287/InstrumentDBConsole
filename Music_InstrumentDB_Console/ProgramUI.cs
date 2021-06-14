@@ -1,5 +1,6 @@
 ﻿using Music_InstrumentDB_Console.POCO;
 using Music_InstrumentDB_Console.ProgramUIMethods;
+using Music_InstrumentDB_Console.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,16 +106,52 @@ namespace Music_InstrumentDB_Console
                 }
             }
         }
-
+        FamilyMethod _familyMethod = new FamilyMethod();
         private void InstrumentFamilyAccess()
         {
-            Console.Clear();
-            Console.WriteLine("You are now accessing instrument families");
-            Console.ReadKey();
+            bool keepRunning = true;
+            while (keepRunning)
+            {
+                Console.Clear();
+                Console.WriteLine("You are now accessing Instrument Familes. What would you like to do?");
+                Console.WriteLine("\nSelect a menu option:\n" +
+                    "1. Create Instrument Family\n" + // Post
+                    "2. View All Instrument Families\n" + // Get
+                    "3. View Instrument Families by ID\n" + // Get By ID
+                    "4. Update Instrument Family\n" + // Put
+                    "5. Delete Instrument Family\n" + // Delete
+                    "6. Return");
+
+                string input = Console.ReadLine();
+
+                switch (input)
+                {
+                    case "1":
+                        _familyMethod.CreateNewInstrumentFamily(); 
+                        break;
+                    case "2":
+                        _familyMethod.ViewAllInstrumentFamiliesAsync();
+                        break;
+                    case "3":
+                        _familyMethod.ViewInstrumentFamiliesById();
+                        break;
+                    case "4":
+                        _familyMethod.UpdateInstrumentFamily();
+                        break;
+                    case "5":
+                        _familyMethod.DeleteInstrumentFamily();
+                        break;
+                    case "6":
+                        keepRunning = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter a valid number");
+                        break;
+                }
+            }
         }
 
-
-        private void MusicianAccess()
+            private void MusicianAccess()
         {
             bool isRunning = true;
             while (isRunning)
