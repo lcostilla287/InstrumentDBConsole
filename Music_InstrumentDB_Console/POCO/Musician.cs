@@ -17,6 +17,9 @@ namespace Music_InstrumentDB_Console.POCO
 
         [JsonProperty("InstrumentId")]
         public int InstrumentId { get; set; }
+        
+        [JsonProperty("InstrumentName")]
+        public string InstrumentName { get; set; }
 
         [JsonProperty("MusicGenre")]
         public string MusicGenre { get; set; }

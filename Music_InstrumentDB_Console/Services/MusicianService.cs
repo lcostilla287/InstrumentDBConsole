@@ -1,8 +1,10 @@
 ﻿using Music_InstrumentDB_Console.POCO;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +12,11 @@ namespace Music_InstrumentDB_Console.Services
 {
     public class MusicianService
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        private HttpClient _httpClient = new HttpClient();
+        public void Authorization(string accesstoken)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accesstoken);
+        }
 
         public async Task<Musician> GetMusicianAsync(int id)
         {
@@ -24,14 +30,15 @@ namespace Music_InstrumentDB_Console.Services
             return null;
         }
 
-        public async Task<Musician> GetAllMusicianAsnc()
+        public async Task<List<Musician>> GetAllMusicianAsnc()
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"https://localhost:44363/api/Musician");
 
             if (response.IsSuccessStatusCode)
             {
-                Musician musician = await response.Content.ReadAsAsync<Musician>();
-                return musician;
+                List<Musician> musicians = response.Content.ReadAsAsync<List<Musician>>().Result;
+                //var item = JsonConvert.DeserializeObject<T>(jsonData);
+                return musicians;
             }
             return null;
         }
@@ -49,7 +56,7 @@ namespace Music_InstrumentDB_Console.Services
 
         public async Task<bool> PutMusicianAsync(int id, Musician updatedMusician)
         {
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"https://localhost:44363/api/Musician", updatedMusician);
+            HttpResponseMessage response = await _httpClient.PutAsJsonAsync($"https://localhost:44363/api/Musician", updatedMusician);
 
             if (response.IsSuccessStatusCode)
             {

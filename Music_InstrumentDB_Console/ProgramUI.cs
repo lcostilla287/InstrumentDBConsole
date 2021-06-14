@@ -14,8 +14,12 @@ namespace Music_InstrumentDB_Console
     public class ProgramUI
     {
         private Authentication authentication = new Authentication();
+
+        private MusicianMethod _musicianMethod = new MusicianMethod();
+
         private InstrumentMethod _instrumentMethod = new InstrumentMethod();
         
+
         public void Run()
         {
             Login();
@@ -59,7 +63,11 @@ namespace Music_InstrumentDB_Console
             if (token.AccessToken != null)
             {
                 Console.WriteLine("Welcome");
+
+                _musicianMethod.ImplementBearerToken(token.AccessToken);
+
                 _instrumentMethod.ImplementBearerToken(token.AccessToken);
+
                 Console.ReadKey();
 
                 Menu();
@@ -172,12 +180,19 @@ namespace Music_InstrumentDB_Console
                 switch (Console.ReadLine())
                 {
                     case "1":
+                        _musicianMethod.CreateMusician();
                         break;
                     case "2":
+                        _musicianMethod.DisplayMusicianById();
                         break;
                     case "3":
+                        _musicianMethod.DisplayAllMusicians();
                         break;
                     case "4":
+                        _musicianMethod.EditMusician();
+                        break;
+                    case "5":
+                        _musicianMethod.DeleteMusician();
                         break;
                     default:
                         Console.WriteLine("Please select a valid option");
