@@ -175,7 +175,9 @@ namespace Music_InstrumentDB_Console
                     "2. View a musician by id\n" +
                     "3. View all musicians\n" +
                     "4. Edit a musician\n" +
-                    "5. Delete a musician");
+                    "5. Delete a musician\n" +
+                    "6. Search for a musician by name\n" +
+                    "7. Go back");
 
                 switch (Console.ReadLine())
                 {
@@ -193,6 +195,12 @@ namespace Music_InstrumentDB_Console
                         break;
                     case "5":
                         _musicianMethod.DeleteMusician();
+                        break;
+                    case "6":
+                        _musicianMethod.SearchMusicianByName();
+                        break;
+                    case "7":
+                        isRunning = false;
                         break;
                     default:
                         Console.WriteLine("Please select a valid option");
