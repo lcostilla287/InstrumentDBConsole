@@ -15,7 +15,7 @@ namespace Music_InstrumentDB_Console
     {
         private Authentication authentication = new Authentication();
         private InstrumentMethod _instrumentMethod = new InstrumentMethod();
-        //private InstrumentService _instrumentService = new InstrumentService();
+        
         public void Run()
         {
             Login();
@@ -131,19 +131,19 @@ namespace Music_InstrumentDB_Console
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        //InstrumentFamilyAccess();
+                        _instrumentMethod.CreateAnInstrument();
                         break;
                     case "2":
-                        _instrumentMethod.GetInstrumentById();
+                        _instrumentMethod.GetInstrumentByIdAsync();
                         break;
                     case "3":
                         _instrumentMethod.GetAllInstruments();
                         break;
                     case "4":
-                        //runMenu = false;
+                        _instrumentMethod.EditAnInstrument();
                         break;
                     case "5":
-
+                        _instrumentMethod.DeleteAnInstrument();
                         break;
                     case "6":
                         isRunning = false;

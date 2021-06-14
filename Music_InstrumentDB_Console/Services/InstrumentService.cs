@@ -24,10 +24,14 @@ namespace Music_InstrumentDB_Console.Services
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine(response.IsSuccessStatusCode);
+                return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
+
 
         //Get By Id
         public async Task<Instrument> GetInstrumentAsync(int id)
@@ -48,7 +52,8 @@ namespace Music_InstrumentDB_Console.Services
 
             if (response.IsSuccessStatusCode)
             {
-                Instrument instrument = await response.Content.ReadAsAsync<Instrument>();
+
+                Instrument instrument = response.Content.ReadAsAsync<Instrument>().Result;
                 return instrument;
             }
             return null;
@@ -61,7 +66,7 @@ namespace Music_InstrumentDB_Console.Services
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine(response.IsSuccessStatusCode);
+                return response.IsSuccessStatusCode;
             }
             return false;
         }
