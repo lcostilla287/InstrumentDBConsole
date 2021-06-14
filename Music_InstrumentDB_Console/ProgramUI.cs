@@ -1,5 +1,6 @@
 ﻿using Music_InstrumentDB_Console.POCO;
 using Music_InstrumentDB_Console.ProgramUIMethods;
+using Music_InstrumentDB_Console.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,11 @@ namespace Music_InstrumentDB_Console
     public class ProgramUI
     {
         private Authentication authentication = new Authentication();
+
         private MusicianMethod _musicianMethod = new MusicianMethod();
+
+        private InstrumentMethod _instrumentMethod = new InstrumentMethod();
+        
 
         public void Run()
         {
@@ -55,10 +60,14 @@ namespace Music_InstrumentDB_Console
             string password = Console.ReadLine();
 
             Token token = authentication.GetToken(userName, password);
-            if (token != null)
+            if (token.AccessToken != null)
             {
                 Console.WriteLine("Welcome");
+
                 _musicianMethod.ImplementBearerToken(token.AccessToken);
+
+                _instrumentMethod.ImplementBearerToken(token.AccessToken);
+
                 Console.ReadKey();
 
                 Menu();
@@ -73,32 +82,36 @@ namespace Music_InstrumentDB_Console
 
         private void Menu()
         {
-            Console.Clear();
-            Console.WriteLine("What would you like to do?");
-            Console.WriteLine("1. Access Instrument Families\n" +
-                "2. Access Instruments\n" +
-                "3. Access Musicians\n" +
-                "4. Log Out");
-
-            switch (Console.ReadLine())
+            bool runMenu = true;
+            while (runMenu)
             {
-                case "1":
-                    InstrumentFamilyAccess();
-                    break;
-                case "2":
-                    InstrumentAccess();
-                    break;
-                case "3":
-                    MusicianAccess();
-                    break;
-                case "4":
-                    EnterLogin();
-                    break;
-                default:
-                    Console.WriteLine("Please select a valid option");
-                    Console.ReadKey();
-                    Menu();
-                    break;
+                Console.Clear();
+                Console.WriteLine("What would you like to do?");
+                Console.WriteLine("1. Access Instrument Families\n" +
+                    "2. Access Instruments\n" +
+                    "3. Access Musicians\n" +
+                    "4. Log Out");
+
+                switch (Console.ReadLine())
+                {
+                    case "1":
+                        InstrumentFamilyAccess();
+                        break;
+                    case "2":
+                        InstrumentAccess();
+                        break;
+                    case "3":
+                        MusicianAccess();
+                        break;
+                    case "4":
+                        runMenu = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please select a valid option");
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                }
             }
         }
 
@@ -111,11 +124,46 @@ namespace Music_InstrumentDB_Console
 
         private void InstrumentAccess()
         {
-            Console.Clear();
-            Console.WriteLine("You are now accessing instruments");
-            Console.ReadKey();
-        }
+            bool isRunning = true;
+            while (isRunning)
+            {
+                Console.Clear();
+                Console.WriteLine("You are now accessing instruments. What would you like to do?");
+                Console.WriteLine("1. Create an instrument\n" +
+                    "2. View instrument by id\n" +
+                    "3. View all instruments\n" +
+                    "4. Edit an instrument\n" +
+                    "5. Delete an instrument\n" +
+                    "6. Go Back");
 
+                switch (Console.ReadLine())
+                {
+                    case "1":
+                        _instrumentMethod.CreateAnInstrument();
+                        break;
+                    case "2":
+                        _instrumentMethod.GetInstrumentByIdAsync();
+                        break;
+                    case "3":
+                        _instrumentMethod.GetAllInstruments();
+                        break;
+                    case "4":
+                        _instrumentMethod.EditAnInstrument();
+                        break;
+                    case "5":
+                        _instrumentMethod.DeleteAnInstrument();
+                        break;
+                    case "6":
+                        isRunning = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please select a valid option");
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                }
+            }
+        }
         private void MusicianAccess()
         {
             bool isRunning = true;
