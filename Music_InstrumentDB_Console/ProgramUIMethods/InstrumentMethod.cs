@@ -66,14 +66,19 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
         //Works
         public void GetAllInstruments()
         {
-            Console.WriteLine("We are getting all instruments");
+            Console.Clear();
+            Console.WriteLine("Here are the instruments currently in the database");
+            Console.WriteLine("==================================================");
             List<Instrument> instruments = _instrumentService.GetAllInstrumentsAsync().Result;
             if (instruments.Count > 0)
             {
+                Console.WriteLine("ID\t\tInstrument Name");
+                Console.WriteLine("----------------------------------");
                 foreach (Instrument i in instruments)
                 {
-                    Console.WriteLine(i.InstrumentId);
-                    Console.WriteLine(i.InstrumentName);
+                    Console.WriteLine($"{ i.InstrumentId}\t\t{i.InstrumentName}");
+                    //Console.Write($"Instrument name: {i.InstrumentName}");
+                    Console.WriteLine(" ");
                 }
             }
             else
