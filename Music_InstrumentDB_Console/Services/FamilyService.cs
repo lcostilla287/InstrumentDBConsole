@@ -24,7 +24,7 @@ namespace Music_InstrumentDB_Console.Services
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine(response.IsSuccessStatusCode);
+                return true;
             }
 
             return false;
@@ -98,7 +98,7 @@ namespace Music_InstrumentDB_Console.Services
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine(response.IsSuccessStatusCode);
+                return true;
             }
 
             return false;
@@ -110,7 +110,7 @@ namespace Music_InstrumentDB_Console.Services
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine(response.IsSuccessStatusCode);
+                return true;
             }
 
             return false;

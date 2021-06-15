@@ -108,7 +108,7 @@ namespace Music_InstrumentDB_Console
                 }
             }
         }
-        private void InstrumentFamilyAccess()
+        public void InstrumentFamilyAccess()
         {
             bool keepRunning = true;
             while (keepRunning)

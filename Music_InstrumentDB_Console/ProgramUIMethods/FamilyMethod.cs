@@ -12,7 +12,7 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
     public class FamilyMethod
     {
         //private Authentication authentication = new Authentication();
-        private HttpClient httpClient = new HttpClient();
+        //private HttpClient httpClient = new HttpClient();
 
         FamilyService _familyService = new FamilyService();
         public void ImplementBearerToken(string bearerToken)
@@ -34,7 +34,7 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             Console.WriteLine("\nPlease enter a classification for this instrument family:  \n");
             newFamily.Classification = Console.ReadLine();
 
-            Console.WriteLine("\nPlease enter the tuning(s) for this instrument family:  \n");
+            Console.Write("\nPlease enter the tuning(s) for this instrument family:  \n");
             newFamily.Tuning = Console.ReadLine();
 
             bool addSuccess = _familyService.PostFamilyAsync(newFamily).Result;
@@ -57,8 +57,7 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             Console.Clear();
             Console.WriteLine("Returning all instrument families...\n");
             List<InstrumentFamily> instrumentFamily = _familyService.GetAllFamiliesAsync().Result;
-            var time = 2000;
-            Task<List<InstrumentFamily>>.Delay(time);
+            
             if (instrumentFamily != null)
             {
                 foreach (InstrumentFamily family in instrumentFamily)
@@ -179,7 +178,7 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
 
             Console.ReadKey();                
             
-            InstrumentFamily editFamily = new InstrumentFamily();
+            //InstrumentFamily editFamily = new InstrumentFamily();
         }
 
         public void DeleteInstrumentFamily()
@@ -214,7 +213,7 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
                         keepRunning = false;
                         break;
                     default:
-                        Console.Write("Please select a vaid option:  ");
+                        Console.Write("Please select a valid option:  ");
                         Console.ReadKey();
                         break;
                 }
