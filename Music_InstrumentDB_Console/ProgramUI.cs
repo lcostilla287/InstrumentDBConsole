@@ -4,6 +4,7 @@ using Music_InstrumentDB_Console.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -21,7 +22,7 @@ namespace Music_InstrumentDB_Console
         private MusicianMethod _musicianMethod = new MusicianMethod();
 
         private InstrumentMethod _instrumentMethod = new InstrumentMethod();
-        
+
 
 
         public void Run()
@@ -29,9 +30,9 @@ namespace Music_InstrumentDB_Console
             Login();
         }
 
+        private bool login = true;
         private void Login()
         {
-            bool login = true;
             while (login)
             {
                 Console.Clear();
@@ -42,6 +43,7 @@ namespace Music_InstrumentDB_Console
                 {
                     case "1":
                         EnterLogin();
+                        //login = false;
                         break;
                     case "2":
                         login = false;
@@ -54,37 +56,49 @@ namespace Music_InstrumentDB_Console
             }
         }
 
+        private int loginAttempt = 0;
         private void EnterLogin()
         {
-            Console.Clear();
-            Console.Write("Username: ");
-            string userName = Console.ReadLine();
-
-            Console.Write("Password: ");
-            string password = Console.ReadLine();
-
-            Token token = authentication.GetToken(userName, password);
-            if (token.AccessToken != null)
+            loginAttempt = 0;
+            while (loginAttempt <= 2)
             {
+                Console.Clear();
+                Console.Write("Username: ");
+                string userName = Console.ReadLine();
 
-                Console.WriteLine("\n\nWelcome!\n\n");
-                _familyMethod.ImplementBearerToken(token.AccessToken);
-                Console.WriteLine("Press any key to continue...");
-             
-                _musicianMethod.ImplementBearerToken(token.AccessToken);
+                Console.Write("Password: ");
+                string password = Console.ReadLine();
 
-                _instrumentMethod.ImplementBearerToken(token.AccessToken);
+                Token token = authentication.GetToken(userName, password);
+                if (token.AccessToken != null)
+                {
+
+                    Console.WriteLine("\n\nWelcome!\n\n");
+                    _familyMethod.ImplementBearerToken(token.AccessToken);
+                    Console.WriteLine("Press any key to continue...");
+
+                    _musicianMethod.ImplementBearerToken(token.AccessToken);
+
+                    _instrumentMethod.ImplementBearerToken(token.AccessToken);
 
 
-                Console.ReadKey();
+                    Console.ReadKey();
 
-                Menu();
+                    Menu();
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect username or password");
+                    loginAttempt++;
+                    Console.ReadKey();
+                }
             }
-            else
+            if (loginAttempt == 3)
             {
-                Console.WriteLine("Please try again");
+                Console.WriteLine("You have failed 3 login attempts. The program will now end.");
+                SystemSounds.Hand.Play();
                 Console.ReadKey();
-                EnterLogin();
+                login = false;
             }
         }
 
@@ -112,6 +126,7 @@ namespace Music_InstrumentDB_Console
                         MusicianAccess();
                         break;
                     case "4":
+                        loginAttempt = 4;
                         runMenu = false;
                         break;
                     default:
@@ -143,7 +158,7 @@ namespace Music_InstrumentDB_Console
                 switch (input)
                 {
                     case "1":
-                        _familyMethod.CreateNewInstrumentFamily(); 
+                        _familyMethod.CreateNewInstrumentFamily();
                         break;
                     case "2":
                         _familyMethod.ViewAllInstrumentFamiliesAsync();
