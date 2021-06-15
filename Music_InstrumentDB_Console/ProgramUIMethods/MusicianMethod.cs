@@ -134,13 +134,38 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
 
             bool wasDeleted = _musicianService.DeleteMusicianAsync(Convert.ToInt32(Console.ReadLine())).Result;
 
-            if(wasDeleted)
+            if (wasDeleted)
             {
                 Console.WriteLine("The musician was successfully deleted");
             }
             else
             {
                 Console.WriteLine("The musician could not be deleted");
+            }
+        }
+
+        public void SearchMusicianByName()
+        {
+            Console.Clear();
+            Console.WriteLine("What is the name of the musician you would like to search for?");
+            string input = Console.ReadLine();
+
+            List<Musician> musicians = _musicianService.GetMusicianByNameAsync(input).Result;
+
+            if (musicians.Count > 0)
+            {
+                foreach (Musician m in musicians)
+                {
+                    Console.WriteLine($"Musician ID:  {m.FamousMusicianId} \n" +
+                    $"Full Name: {m.FullName} \n" +
+                    $"Instrument they play:  {m.InstrumentName} \n" +
+                    $"Instrument ID:  {m.InstrumentId} \n" +
+                    $"Genre:  {m.MusicGenre} \n");
+                }
+            }
+            else
+            {
+                Console.WriteLine("There is no musician with that name");
             }
         }
     }
