@@ -11,9 +11,6 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
 {
     public class FamilyMethod
     {
-        //private Authentication authentication = new Authentication();
-        //private HttpClient httpClient = new HttpClient();
-
         FamilyService _familyService = new FamilyService();
         public void ImplementBearerToken(string bearerToken)
         {
@@ -41,7 +38,7 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             if (addSuccess)
             {
                 Console.WriteLine("\nCongratulations!  You have successfully created an new instrument family!\n\n" +
-                    "Press any key to continue...");                
+                    "Press any key to continue...");
             }
             else
             {
@@ -57,7 +54,7 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             Console.Clear();
             Console.WriteLine("Returning all instrument families...\n");
             List<InstrumentFamily> instrumentFamily = _familyService.GetAllFamiliesAsync().Result;
-            
+
             if (instrumentFamily != null)
             {
                 foreach (InstrumentFamily family in instrumentFamily)
@@ -75,7 +72,6 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             {
                 Console.WriteLine("WARNING:  The instrument family could not be located; please select another option.");
             }
-
         }
 
         public void ViewInstrumentFamiliesById()
@@ -116,7 +112,7 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
                 "5. Return\n");
 
             string editFam = Console.ReadLine();
-            
+
             switch (editFam)
             {
                 case "1":
@@ -170,15 +166,12 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
                     break;
                 case "5":
                     UpdateInstrumentFamily();
-                    break;               
+                    break;
                 default:
                     Console.WriteLine("Please enter a valid number");
                     break;
             }
-
-            Console.ReadKey();                
-            
-            //InstrumentFamily editFamily = new InstrumentFamily();
+            Console.ReadKey();
         }
 
         public void DeleteInstrumentFamily()
@@ -217,9 +210,7 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
                         Console.ReadKey();
                         break;
                 }
-
             }
-
             Console.ReadKey();
         }
     }

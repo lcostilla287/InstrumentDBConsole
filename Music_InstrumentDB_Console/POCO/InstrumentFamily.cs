@@ -10,11 +10,8 @@ namespace Music_InstrumentDB_Console.POCO
     public class InstrumentFamily
     {
         [JsonProperty("FamilyId")]
-        public int FamilyId { get; set; }
-        
-        //[JsonProperty("owner_id")]
-        //public Guid OwnerId { get; set; }
-
+        public int FamilyId { get; set; }      
+    
         [JsonProperty("FamilyName")]
         public string FamilyName { get; set; }
 

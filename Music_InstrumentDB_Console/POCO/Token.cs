@@ -27,6 +27,5 @@ namespace Music_InstrumentDB_Console.POCO
         [JsonProperty(".expires")]
         public string Expires { get; set; }
 
-
     }
 }
