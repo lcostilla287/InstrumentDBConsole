@@ -86,13 +86,33 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
         //works
         public void GetInstrumentByIdAsync()
         {
-            Console.WriteLine("We are getting an instrument by Id");
-            Console.WriteLine("Please enter the Id of the instrument you would like to get.");
+            Console.Clear();
+            Console.Write("Please enter the Id of the instrument you would like to get:");
 
             Instrument instrument = _instrumentService.GetInstrumentAsync(Convert.ToInt32(Console.ReadLine())).Result;
             if (instrument != null)
             {
-                Console.WriteLine(instrument.InstrumentName);
+                Console.WriteLine(" ");
+                Console.WriteLine($"ID: {instrument.InstrumentId}");
+                Console.WriteLine($"InstrumentName: {instrument.InstrumentName}");
+                Console.WriteLine($"Description: {instrument.Description}");
+                Console.WriteLine($"Transposition: {instrument.Transposition}");
+                if (instrument.FamilyId != null)
+                {
+                    Console.WriteLine($"Instrument Family: {instrument.InstrumentFamilyName}");
+                }
+                else
+                {
+                    Console.WriteLine("This instrument has not been put in and instrument family");
+                }
+                if (instrument.Musicians.Count > 0)
+                {
+                    Console.Write("Played by:");
+                    foreach (Musician m in instrument.Musicians)
+                    {
+                        Console.Write(m.FullName);
+                    }
+                }
             }
             else
             {
@@ -113,7 +133,7 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
                 {
                     Console.WriteLine(i.InstrumentId);
                     Console.WriteLine(i.InstrumentName);
-                    
+
                 }
             }
             else
