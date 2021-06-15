@@ -15,10 +15,14 @@ namespace Music_InstrumentDB_Console
     {
         private Authentication authentication = new Authentication();
 
+        FamilyMethod _familyMethod = new FamilyMethod();
+
+
         private MusicianMethod _musicianMethod = new MusicianMethod();
 
         private InstrumentMethod _instrumentMethod = new InstrumentMethod();
         
+
 
         public void Run()
         {
@@ -62,11 +66,15 @@ namespace Music_InstrumentDB_Console
             Token token = authentication.GetToken(userName, password);
             if (token.AccessToken != null)
             {
-                Console.WriteLine("Welcome");
 
+                Console.WriteLine("\n\nWelcome!\n\n");
+                _familyMethod.ImplementBearerToken(token.AccessToken);
+                Console.WriteLine("Press any key to continue...");
+             
                 _musicianMethod.ImplementBearerToken(token.AccessToken);
 
                 _instrumentMethod.ImplementBearerToken(token.AccessToken);
+
 
                 Console.ReadKey();
 
@@ -114,13 +122,53 @@ namespace Music_InstrumentDB_Console
                 }
             }
         }
-
-        private void InstrumentFamilyAccess()
+        public void InstrumentFamilyAccess()
         {
-            Console.Clear();
-            Console.WriteLine("You are now accessing instrument families");
-            Console.ReadKey();
+            bool keepRunning = true;
+            while (keepRunning)
+            {
+                Console.Clear();
+                Console.WriteLine("You are now accessing Instrument Familes. What would you like to do?");
+                Console.WriteLine("\nSelect a menu option:\n" +
+                    "1. Create Instrument Family\n" + // Post
+                    "2. View All Instrument Families\n" + // Get
+                    "3. View Instrument Families by ID\n" + // Get By ID
+                    "4. Update Instrument Family\n" + // Put
+                    "5. Delete Instrument Family\n" + // Delete
+                    "6. Return to the Main Menu\n");
+
+
+                string input = Console.ReadLine();
+
+                switch (input)
+                {
+                    case "1":
+                        _familyMethod.CreateNewInstrumentFamily(); 
+                        break;
+                    case "2":
+                        _familyMethod.ViewAllInstrumentFamiliesAsync();
+                        break;
+                    case "3":
+                        _familyMethod.ViewInstrumentFamiliesById();
+                        break;
+                    case "4":
+                        _familyMethod.UpdateInstrumentFamily();
+                        break;
+                    case "5":
+                        _familyMethod.DeleteInstrumentFamily();
+                        break;
+                    case "6":
+                        keepRunning = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter a valid number");
+                        break;
+                }
+                Console.ReadKey();
+            }
         }
+
+            private void MusicianAccess()
 
         private void InstrumentAccess()
         {
@@ -169,6 +217,7 @@ namespace Music_InstrumentDB_Console
             }
         }
         private void MusicianAccess()
+
         {
             bool isRunning = true;
             while (isRunning)
