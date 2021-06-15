@@ -4,6 +4,7 @@ using Music_InstrumentDB_Console.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -42,6 +43,7 @@ namespace Music_InstrumentDB_Console
                 {
                     case "1":
                         EnterLogin();
+                        login = false;
                         break;
                     case "2":
                         login = false;
@@ -56,6 +58,9 @@ namespace Music_InstrumentDB_Console
 
         private void EnterLogin()
         {
+            int loginAttempt = 1;
+            while (loginAttempt <= 3)
+            {
             Console.Clear();
             Console.Write("Username: ");
             string userName = Console.ReadLine();
@@ -63,28 +68,35 @@ namespace Music_InstrumentDB_Console
             Console.Write("Password: ");
             string password = Console.ReadLine();
 
-            Token token = authentication.GetToken(userName, password);
-            if (token.AccessToken != null)
-            {
+                Token token = authentication.GetToken(userName, password);
+                if (token.AccessToken != null)
+                {
 
-                Console.WriteLine("\n\nWelcome!\n\n");
-                _familyMethod.ImplementBearerToken(token.AccessToken);
-                Console.WriteLine("Press any key to continue...");
-             
-                _musicianMethod.ImplementBearerToken(token.AccessToken);
+                    Console.WriteLine("\n\nWelcome!\n\n");
+                    _familyMethod.ImplementBearerToken(token.AccessToken);
+                    Console.WriteLine("Press any key to continue...");
 
-                _instrumentMethod.ImplementBearerToken(token.AccessToken);
+                    _musicianMethod.ImplementBearerToken(token.AccessToken);
+
+                    _instrumentMethod.ImplementBearerToken(token.AccessToken);
 
 
-                Console.ReadKey();
+                    Console.ReadKey();
 
-                Menu();
+                    Menu();
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect username or password");
+                    loginAttempt++;
+                    Console.ReadKey();
+                }
             }
-            else
+            if (loginAttempt > 3)
             {
-                Console.WriteLine("Please try again");
+                Console.WriteLine("You have failed 3 login attempts. The program will now end.");
+                SystemSounds.Hand.Play();
                 Console.ReadKey();
-                EnterLogin();
             }
         }
 
