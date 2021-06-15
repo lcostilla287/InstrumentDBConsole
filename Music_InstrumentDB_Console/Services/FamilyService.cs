@@ -18,7 +18,7 @@ namespace Music_InstrumentDB_Console.Services
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accesstoken);
         }
 
-        public async Task<bool> PostFamilyAsync(int id, InstrumentFamily newFamily)
+        public async Task<bool> PostFamilyAsync(InstrumentFamily newFamily)
         {
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"https://localhost:44363/api/InstrumentFamily/", newFamily);
 

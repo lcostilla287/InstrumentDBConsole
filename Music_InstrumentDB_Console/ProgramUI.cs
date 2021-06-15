@@ -58,7 +58,7 @@ namespace Music_InstrumentDB_Console
             Token token = authentication.GetToken(userName, password);
             if (token.AccessToken != null)
             {
-                Console.WriteLine("Welcome");
+                Console.WriteLine("\n\nWelcome!\n\n");
                 _familyMethod.ImplementBearerToken(token.AccessToken);
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
@@ -121,7 +121,7 @@ namespace Music_InstrumentDB_Console
                     "3. View Instrument Families by ID\n" + // Get By ID
                     "4. Update Instrument Family\n" + // Put
                     "5. Delete Instrument Family\n" + // Delete
-                    "6. Return");
+                    "6. Return to the Main Menu\n");
 
                 string input = Console.ReadLine();
 
