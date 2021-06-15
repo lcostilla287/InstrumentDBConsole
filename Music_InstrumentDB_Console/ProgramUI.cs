@@ -134,7 +134,8 @@ namespace Music_InstrumentDB_Console
                     "3. View all instruments\n" +
                     "4. Edit an instrument\n" +
                     "5. Delete an instrument\n" +
-                    "6. Go Back");
+                    "6. Search Instrument by name\n" +
+                    "7. Go Back");
 
                 switch (Console.ReadLine())
                 {
@@ -154,6 +155,9 @@ namespace Music_InstrumentDB_Console
                         _instrumentMethod.DeleteAnInstrument();
                         break;
                     case "6":
+                        _instrumentMethod.SearchInstrumentByName();
+                        break;
+                    case "7":
                         isRunning = false;
                         break;
                     default:

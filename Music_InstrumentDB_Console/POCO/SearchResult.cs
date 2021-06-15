@@ -9,6 +9,6 @@ namespace Music_InstrumentDB_Console.POCO
     public class SearchResult<T>
     {
         public int Count { get; set; }
-        public List<T> Results { get; set; }
+        public List<T> Results { get; set; } = new List<T>();
     }
 }
