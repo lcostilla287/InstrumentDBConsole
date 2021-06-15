@@ -148,12 +148,13 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
         {
             Console.Clear();
             Console.WriteLine("What is the name of the musician you would like to search for?");
+            string input = Console.ReadLine();
 
-            SearchResult<Musician> musician = _musicianService.GetMusicianByNameAsync(Console.ReadLine()).Result;
+            List<Musician> musicians = _musicianService.GetMusicianByNameAsync(input).Result;
 
-            if (musician != null)
+            if (musicians.Count > 0)
             {
-                foreach (Musician m in musician.Results)
+                foreach (Musician m in musicians)
                 {
                     Console.WriteLine($"Musician ID:  {m.FamousMusicianId} \n" +
                     $"Full Name: {m.FullName} \n" +
