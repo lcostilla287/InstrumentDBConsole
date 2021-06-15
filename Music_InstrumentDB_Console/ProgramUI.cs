@@ -22,7 +22,7 @@ namespace Music_InstrumentDB_Console
         private MusicianMethod _musicianMethod = new MusicianMethod();
 
         private InstrumentMethod _instrumentMethod = new InstrumentMethod();
-        
+
 
 
         public void Run()
@@ -30,9 +30,9 @@ namespace Music_InstrumentDB_Console
             Login();
         }
 
+        private bool login = true;
         private void Login()
         {
-            bool login = true;
             while (login)
             {
                 Console.Clear();
@@ -43,7 +43,7 @@ namespace Music_InstrumentDB_Console
                 {
                     case "1":
                         EnterLogin();
-                        login = false;
+                        //login = false;
                         break;
                     case "2":
                         login = false;
@@ -56,17 +56,17 @@ namespace Music_InstrumentDB_Console
             }
         }
 
+        private int loginAttempt = 0;
         private void EnterLogin()
         {
-            int loginAttempt = 1;
-            while (loginAttempt <= 3)
+            while (loginAttempt <= 2)
             {
-            Console.Clear();
-            Console.Write("Username: ");
-            string userName = Console.ReadLine();
+                Console.Clear();
+                Console.Write("Username: ");
+                string userName = Console.ReadLine();
 
-            Console.Write("Password: ");
-            string password = Console.ReadLine();
+                Console.Write("Password: ");
+                string password = Console.ReadLine();
 
                 Token token = authentication.GetToken(userName, password);
                 if (token.AccessToken != null)
@@ -92,11 +92,12 @@ namespace Music_InstrumentDB_Console
                     Console.ReadKey();
                 }
             }
-            if (loginAttempt > 3)
+            if (loginAttempt == 3)
             {
                 Console.WriteLine("You have failed 3 login attempts. The program will now end.");
                 SystemSounds.Hand.Play();
                 Console.ReadKey();
+                login = false;
             }
         }
 
@@ -124,6 +125,7 @@ namespace Music_InstrumentDB_Console
                         MusicianAccess();
                         break;
                     case "4":
+                        loginAttempt = 4;
                         runMenu = false;
                         break;
                     default:
@@ -155,7 +157,7 @@ namespace Music_InstrumentDB_Console
                 switch (input)
                 {
                     case "1":
-                        _familyMethod.CreateNewInstrumentFamily(); 
+                        _familyMethod.CreateNewInstrumentFamily();
                         break;
                     case "2":
                         _familyMethod.ViewAllInstrumentFamiliesAsync();
