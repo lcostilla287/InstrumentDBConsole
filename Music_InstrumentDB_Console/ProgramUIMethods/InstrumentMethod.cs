@@ -72,8 +72,8 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             {
                 foreach (Instrument i in instruments)
                 {
-                Console.WriteLine(i.InstrumentId);
-                Console.WriteLine(i.InstrumentName);
+                    Console.WriteLine(i.InstrumentId);
+                    Console.WriteLine(i.InstrumentName);
                 }
             }
             else
@@ -103,20 +103,24 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
 
         public void SearchInstrumentByName()
         {
-            Console.Write("What is the name of the instrument that you would like to search for?");
-            SearchResult<Instrument> instruments = _instrumentService.GetSearchAsync(Console.ReadLine()).Result;
+            Console.Write("What is the name of the instrument that you would like to search for? ");
+            string input = Console.ReadLine();
+            List<Instrument> instruments = _instrumentService.GetSearchAsync(input).Result;
             if (instruments.Count > 0)
             {
-                    Console.WriteLine("Here are the instruments by that name");
-                foreach(Instrument instrumentResult in instruments.Results)
+                Console.WriteLine("Here are the results of you search");
+                foreach (Instrument i in instruments)
                 {
-                    Console.WriteLine(instrumentResult.InstrumentName);
+                    Console.WriteLine(i.InstrumentId);
+                    Console.WriteLine(i.InstrumentName);
+                    
                 }
             }
             else
             {
                 Console.WriteLine("There are no instruments by that name");
             }
+            Console.ReadKey();
         }
 
         public void EditAnInstrument()
