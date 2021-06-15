@@ -168,8 +168,6 @@ namespace Music_InstrumentDB_Console
             }
         }
 
-            private void MusicianAccess()
-
         private void InstrumentAccess()
         {
             bool isRunning = true;
