@@ -59,6 +59,7 @@ namespace Music_InstrumentDB_Console
         private int loginAttempt = 0;
         private void EnterLogin()
         {
+            loginAttempt = 0;
             while (loginAttempt <= 2)
             {
                 Console.Clear();
