@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Music_InstrumentDB_Console", "Music_InstrumentDB_Console\Music_InstrumentDB_Console.csproj", "{5D444D9A-3D91-42FD-A6AE-E9EE34EE6AD8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{E4A77133-830E-40AA-B8A3-68CE2947E3D4}"
+	ProjectSection(SolutionItems) = preProject
+		Startup Powermac PCI.wav = Startup Powermac PCI.wav
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
