@@ -81,18 +81,7 @@ namespace Music_InstrumentDB_Console.Services
             return null;
 
         }
-
-        public async Task<SearchResult<T>> GetSearchAsync<T>(string category, string query)
-        {
-            HttpResponseMessage response = await _httpClient.GetAsync($"https://localhost:44363/api/{category}/?search={query}");
-
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<SearchResult<T>>();
-            }
-            return null;
-        }
-
+       
         public async Task<bool> PutFamilyAsync(int id, InstrumentFamily editFamily)
         {
             HttpResponseMessage response = await _httpClient.PutAsJsonAsync($"https://localhost:44363/api/InstrumentFamily/{id}", editFamily);
