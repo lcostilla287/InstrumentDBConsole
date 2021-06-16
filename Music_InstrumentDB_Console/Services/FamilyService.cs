@@ -1,4 +1,5 @@
 ﻿using Music_InstrumentDB_Console.POCO;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,13 +69,13 @@ namespace Music_InstrumentDB_Console.Services
             return default;
         }
 
-        public async Task<SearchResult<InstrumentFamily>> GetFamilySearchAsync(string query)
+        public async Task<List<InstrumentFamily>> GetFamilySearchAsync(string query)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync("https://localhost:44363/api/InstrumentFamily?search=" + query);
-
+            HttpResponseMessage response = await _httpClient.GetAsync("https://localhost:44363/api/InstrumentFamily?ifsearch=" + query);
+            
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadAsAsync<SearchResult<InstrumentFamily>>();
+                return await response.Content.ReadAsAsync<List<InstrumentFamily>>();
             }
 
             return null;
