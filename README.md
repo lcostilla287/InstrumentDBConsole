@@ -17,8 +17,9 @@ As the user accesses a particular data set, they will be prompted to choose one 
 3. View by Id
 4. Update
 5. Delete
+6. Search by Name
 
-## Instalation
+## Installation
 This solution requires the [visual studio community](https://visualstudio.microsoft.com/vs/community/) application to function.
 Once downloaded, click on the green **Code** icon on the [Github](https://github.com/lcostilla287/InstrumentDBConsole) page.
 You can either clone or download the zip file according to your preference
