@@ -71,7 +71,7 @@ namespace Music_InstrumentDB_Console.Services
 
         public async Task<List<InstrumentFamily>> GetFamilySearchAsync(string query)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync("https://localhost:44363/api/InstrumentFamily?ifsearch=" + query);
+            HttpResponseMessage response = await _httpClient.GetAsync("https://localhost:44363/api/InstrumentFamily?search=" + query);
             
             if (response.IsSuccessStatusCode)
             {
