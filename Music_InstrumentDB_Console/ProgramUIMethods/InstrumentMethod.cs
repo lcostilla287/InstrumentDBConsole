@@ -17,7 +17,7 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             _instrumentService.Authorization(bearerToken);
         }
 
-        //works
+        
         public void CreateAnInstrument()
         {
             Instrument instrument = new Instrument();
@@ -63,17 +63,22 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             Console.ReadKey();
         }
 
-        //Works
+        
         public void GetAllInstruments()
         {
-            Console.WriteLine("We are getting all instruments");
+            Console.Clear();
+            Console.WriteLine("Here are the instruments currently in the database");
+            Console.WriteLine("==================================================");
             List<Instrument> instruments = _instrumentService.GetAllInstrumentsAsync().Result;
             if (instruments.Count > 0)
             {
+                Console.WriteLine("ID\t\tInstrument Name");
+                Console.WriteLine("----------------------------------");
                 foreach (Instrument i in instruments)
                 {
-                    Console.WriteLine(i.InstrumentId);
-                    Console.WriteLine(i.InstrumentName);
+                    Console.WriteLine($"{ i.InstrumentId}\t\t{i.InstrumentName}");
+                    //Console.Write($"Instrument name: {i.InstrumentName}");
+                    Console.WriteLine(" ");
                 }
             }
             else
@@ -83,16 +88,36 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             Console.ReadKey();
         }
 
-        //works
+        
         public void GetInstrumentByIdAsync()
         {
-            Console.WriteLine("We are getting an instrument by Id");
-            Console.WriteLine("Please enter the Id of the instrument you would like to get.");
+            Console.Clear();
+            Console.Write("Please enter the Id of the instrument you would like to get:");
 
             Instrument instrument = _instrumentService.GetInstrumentAsync(Convert.ToInt32(Console.ReadLine())).Result;
             if (instrument != null)
             {
-                Console.WriteLine(instrument.InstrumentName);
+                Console.WriteLine(" ");
+                Console.WriteLine($"ID: {instrument.InstrumentId}");
+                Console.WriteLine($"InstrumentName: {instrument.InstrumentName}");
+                Console.WriteLine($"Description: {instrument.Description}");
+                Console.WriteLine($"Transposition: {instrument.Transposition}");
+                if (instrument.FamilyId != null)
+                {
+                    Console.WriteLine($"Instrument Family: {instrument.InstrumentFamilyName}");
+                }
+                else
+                {
+                    Console.WriteLine("This instrument has not been put in and instrument family");
+                }
+                if (instrument.Musicians.Count > 0)
+                {
+                    Console.Write("Played by:");
+                    foreach (Musician m in instrument.Musicians)
+                    {
+                        Console.Write(m.FullName);
+                    }
+                }
             }
             else
             {
@@ -100,20 +125,41 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             }
             Console.ReadKey();
         }
-
+        //look at this in api so we can get all the info back
         public void SearchInstrumentByName()
         {
+            Console.Clear();
             Console.Write("What is the name of the instrument that you would like to search for? ");
             string input = Console.ReadLine();
             List<Instrument> instruments = _instrumentService.GetSearchAsync(input).Result;
             if (instruments.Count > 0)
             {
+                Console.WriteLine(" ");
                 Console.WriteLine("Here are the results of you search");
+                Console.WriteLine("==================================");
                 foreach (Instrument i in instruments)
                 {
-                    Console.WriteLine(i.InstrumentId);
-                    Console.WriteLine(i.InstrumentName);
-                    
+                    Console.WriteLine($"ID: {i.InstrumentId}");
+                    Console.WriteLine($"Instrument name: {i.InstrumentName}");
+                    Console.WriteLine($"Description: {i.Description}");
+                    Console.WriteLine($"Transposition: {i.Transposition}");
+                    if (i.FamilyId != null)
+                    {
+                        Console.WriteLine($"Instrument Family: {i.InstrumentFamilyName}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("This instrument has not been put in and instrument family");
+                    }
+                    if (i.Musicians != null)
+                    {
+                        Console.Write("Played by:");
+                        foreach (Musician m in i.Musicians)
+                        {
+                            Console.Write(m.FullName);
+                        }
+                    }
+                    Console.WriteLine(" ");
                 }
             }
             else
@@ -126,9 +172,8 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
         public void EditAnInstrument()
         {
             Console.Clear();
-            Console.WriteLine("We are editing an instrument");
 
-            Console.WriteLine("Please enter the Id of the instrument you would like to get.");
+            Console.WriteLine("Please enter the Id of the instrument you would like to edit.");
 
             Instrument instrument = _instrumentService.GetInstrumentAsync(Convert.ToInt32(Console.ReadLine())).Result;
             if (instrument != null)
@@ -147,7 +192,6 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
                             HelpEditInstrument(instrument.InstrumentId);
                             break;
                         case "n":
-                            EditAnInstrument();
                             keepRunning = false;
                             break;
                         default:
@@ -160,8 +204,8 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             else
             {
                 Console.WriteLine("There is no instrument by that id");
-            }
             Console.ReadKey();
+            }
         }
         //works
         public void HelpEditInstrument(int instrumentId)
@@ -221,7 +265,8 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             }
             else
             {
-                Console.WriteLine("The instrument could not be deleted");
+                Console.WriteLine("The instrument could not be deleted.");
+                Console.WriteLine("Please check to see if you have the correct Instrument ID or get rid of all musicians referencing this instrument.");
             }
             Console.ReadKey();
         }
