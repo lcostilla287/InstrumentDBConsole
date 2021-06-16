@@ -213,6 +213,61 @@ namespace Music_InstrumentDB_Console.ProgramUIMethods
             }
             Console.ReadKey();
         }
+
+        public void GetFamilySearchAsync()
+        {
+            Console.Clear();
+            Console.Write("Search an Instrument Family HERE:  ");
+            string query = Console.ReadLine();
+            List<InstrumentFamily> srchFam = _familyService.GetFamilySearchAsync(query.ToLower()).Result;
+
+            if (_familyService != null)
+            {
+                //Console.WriteLine(srchFam.Count);
+                //Console.WriteLine(srchFam.Results);
+                foreach (InstrumentFamily family in srchFam)
+                {
+                    Console.WriteLine("===================================================");
+                    Console.WriteLine($"\nFamily ID:  {family.FamilyId}");
+                    Console.WriteLine($"Family Name:  {family.FamilyName}");
+                    Console.WriteLine($"\nDescription:  {family.Description}\n");
+                    Console.WriteLine($"Classification:  {family.Classification}");
+                    Console.WriteLine($"Tuning:  {family.Tuning}\n");
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nSorry...your search yielded no results.  Please attempt a different search or return to the previous menu.\n" 
+                    //+
+                    //"1. Search again\n" +
+                    //"2. Return to previous menu"
+                    );
+
+                GetFamilySearchAsync();
+            }
+
+            bool keepRunning = true;
+            while (keepRunning)
+            {
+                Console.Write("Would you like to search again? Y/N:    ");
+                string yesNo = Console.ReadLine();
+
+                switch (yesNo.ToLower())
+                {
+                    case "y":
+                        GetFamilySearchAsync();
+                        keepRunning = false;
+                            break;
+                    case "n":
+                        keepRunning = false;
+                        break;
+                    default:
+                        Console.Write("Please select a valid option:  ");
+                        Console.ReadKey();
+                        break;
+                }
+                    }
+        }
     }
 }
 

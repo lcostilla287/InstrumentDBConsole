@@ -134,8 +134,9 @@ namespace Music_InstrumentDB_Console
                     "2. View All Instrument Families\n" + // Get
                     "3. View Instrument Families by ID\n" + // Get By ID
                     "4. Update Instrument Family\n" + // Put
-                    "5. Delete Instrument Family\n" + // Delete
-                    "6. Return to the Main Menu\n");
+                    "5. Delete Instrument Family\n" +
+                    "6. Search Instrument Families\n" + // Delete
+                    "7. Return to the Main Menu\n");
 
 
                 string input = Console.ReadLine();
@@ -158,6 +159,9 @@ namespace Music_InstrumentDB_Console
                         _familyMethod.DeleteInstrumentFamily();
                         break;
                     case "6":
+                        _familyMethod.GetFamilySearchAsync();
+                        break;
+                    case "7":
                         keepRunning = false;
                         break;
                     default:
