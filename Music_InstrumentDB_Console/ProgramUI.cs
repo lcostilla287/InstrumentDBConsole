@@ -33,6 +33,7 @@ namespace Music_InstrumentDB_Console
         private bool login = true;
         private void Login()
         {
+            
             while (login)
             {
                 Console.Clear();
@@ -75,12 +76,13 @@ namespace Music_InstrumentDB_Console
 
                     Console.WriteLine("\n\nWelcome!\n\n");
                     _familyMethod.ImplementBearerToken(token.AccessToken);
-                    Console.WriteLine("Press any key to continue...");
 
                     _musicianMethod.ImplementBearerToken(token.AccessToken);
 
                     _instrumentMethod.ImplementBearerToken(token.AccessToken);
-
+                    System.Media.SoundPlayer successfullLogin = new System.Media.SoundPlayer(@"C:\Users\luis1\Desktop\Luis\Music_InstrumentDB_Console\Startup Powermac PCI.wav");
+                    successfullLogin.Play();
+                    Console.WriteLine("Press any key to continue...");
 
                     Console.ReadKey();
 
