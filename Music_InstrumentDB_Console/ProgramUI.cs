@@ -3,6 +3,7 @@ using Music_InstrumentDB_Console.ProgramUIMethods;
 using Music_InstrumentDB_Console.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Net.Http;
@@ -14,6 +15,7 @@ namespace Music_InstrumentDB_Console
 {
     public class ProgramUI
     {
+        //public static string wav_file_path = @"..\..\..\Startup Powermac PCI.wav";
         private Authentication authentication = new Authentication();
 
         FamilyMethod _familyMethod = new FamilyMethod();
@@ -80,8 +82,9 @@ namespace Music_InstrumentDB_Console
                     _musicianMethod.ImplementBearerToken(token.AccessToken);
 
                     _instrumentMethod.ImplementBearerToken(token.AccessToken);
-                    System.Media.SoundPlayer successfullLogin = new System.Media.SoundPlayer(@"C:\Users\luis1\Desktop\Luis\Music_InstrumentDB_Console\Startup Powermac PCI.wav");
+                    System.Media.SoundPlayer successfullLogin = new System.Media.SoundPlayer(@"..\..\..\Startup Powermac PCI.wav");
                     successfullLogin.Play();
+                    
                     Console.WriteLine("Press any key to continue...");
 
                     Console.ReadKey();
